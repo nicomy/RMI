@@ -8,11 +8,13 @@ import java.rmi.RMISecurityManager;
 public class Server {
   /**
    * @param args
+
    */
   public static void main(final String args[]) {
     String nom="";
     int nombre=1; int port = 1099;
     Registry registry=null;
+    
     // récupération des arguments
     if (args.length!=3){
       System.out.println("Server <nom générique des objets distants> <nombre de noms> <port du registry>");
@@ -30,8 +32,15 @@ public class Server {
     // A COMPLETER : INSTALLATIOND'UN SECURITYMANAGER
     // A COMPLETER : MISE EN PLACE DU REGISTRY
     try {
+		registry= LocateRegistry.createRegistry(port);
+	} catch (RemoteException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	}
+    try {
       for(int i=1;i<=nombre;i++){
       	// A COMPLETER : CONSTRUCTION ET EXPORTATION DES OBJETS DISTANTS
+    	registry.bind(nom + i, // objet suplier );
       }
       System.out.println("Tous les objets sont enregistrés dans le serveur d'objets distants");
     } catch (Exception e) {
